@@ -1,12 +1,20 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
+const busStopRouter = require('./routes/busStopsRoute');
+const busArrivalRouter = require('./routes/busArrivalRoute');
 
-app.use(cors());
+if (process.env.NODE_ENV == 'development') {
+    const cors = require('cors');
+    require('dotenv').config();
+    app.use(cors());
+}
 
-app.get('/api', (_, res) => {
-    res.send("This is Bus App express api server.");
-});
+app.use('/api/busstop', busStopRouter);
+app.use('/api/busarrival', busArrivalRouter);
+
+app.get('/api', (_req, res) => {
+    res.send("Bus App Api")
+})
 
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
