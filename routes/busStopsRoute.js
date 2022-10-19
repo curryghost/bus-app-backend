@@ -3,10 +3,6 @@ const express = require('express');
 const router = express.Router();
 const config = require('./config')
 
-router.use((req, res, next) => {
-    next();
-})
-
 router.get('/', async (_req, res) => {
     const data = []
     for (let i = 0; i < 11; i++) {

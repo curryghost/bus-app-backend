@@ -1,13 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const busStopRouter = require('./routes/busStopsRoute');
-const busArrivalRouter = require('./routes/busArrivalRoute');
-
 if (process.env.NODE_ENV == 'development') {
     const cors = require('cors');
-    require('dotenv').config();
     app.use(cors());
 }
+const busStopRouter = require('./routes/busStopsRoute');
+const busArrivalRouter = require('./routes/busArrivalRoute');
 
 app.use('/api/busstop', busStopRouter);
 app.use('/api/busarrival', busArrivalRouter);
